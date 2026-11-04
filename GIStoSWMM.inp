@@ -1,0 +1,184 @@
+[TITLE]
+;;Project Title/Notes 
+test
+
+[RAINGAGES]
+;;Name Format Interval SCF DataSource SourceName StationID RainUnits
+;;------------------------------------------------------------------
+;just a test comment                                    
+                RG_1 VOLUME 01:00  1.0 TIMESERIES TS_1  
+
+[SUBCATCHMENTS]
+;;Name RainGage Outlet Area Imperv Width Slope CurbLen SnowPack
+;;-------------------------------------------------------------
+S_1 RG_1 J_4 1.024363 64.0 100.0 5.0 0.0 
+S_2 RG_1 J_9 2.063503 43.0  87.0 4.2 0.0 
+
+[SUBAREAS]
+;;Name N_Imperv N_Perv S_Imperv S_Perv PctZero RouteTo PctRouted
+;;--------------------------------------------------------------
+S_1 0.023 0.150 2.0 3.0 0.0   OUTLET 100.0
+S_2 0.010 0.087 2.1 0.1 1.0 PERVIOUS 100.0
+
+[INFILTRATION]
+;;Name Param1 Param2 Param3 Param4 Param5 InfMethod
+;;-------------------------------------------------
+S_1 60.955 29.969 0.25   MODIFIED_GREEN_AMPT
+S_2 87.000 24.000 0.10   MODIFIED_GREEN_AMPT
+
+[JUNCTIONS]
+;;Name Elevation MaxDepth InitDepth SurDepth Aponded
+;;--------------------------------------------------
+ J_1 2.50 2.0 0.0   0.0 10.0
+ J_2 2.70 2.3 0.0   0.0 10.0
+ J_3 3.00 2.7 0.0   0.0  0.0
+ J_4 5.00 0.5 0.0   0.0  0.0
+ J_9 4.14 1.8 0.0   0.0  0.0
+ J_8 4.00 2.1 0.0   0.0  0.0
+ J_7 3.70 2.0 0.0   0.0  0.0
+ J_6 3.50 1.2 0.0   0.0 15.0
+J_10 0.00 0.0 0.0 100.0  0.0
+J_12 3.41 0.0 0.0   0.0  0.0
+
+[OUTFALLS]
+;;Name Elevation Type FixedStage Curve_TS FlapGate RouteTo
+;;--------------------------------------------------------
+Out_1 0.0 TIDAL tdc_1 NO 
+Out_2 0.0 FIXED   1.1 NO 
+
+[STORAGE]
+;;Name Elevation MaxDepth InitDepth Type Curve Coeff Exponent Constant MajorAxis MinorAxis SideSlope SurfHeight SurDepth Fevap Psi Ksat IMD
+;;-----------------------------------------------------------------------------------------------------------------------------------------
+St_1 0.0 2.0 0.4 PYRAMIDAL 4.0 2.0 1.0 0.0 0.0   
+
+[CONDUITS]
+;;Name FromNode ToNode Length Roughness InOffset OutOffset InitFlow MaxFlow
+;;-------------------------------------------------------------------------
+       C_10 J_10   J_3 50.226839299057104 0.011   *    * 0.0 0.0
+        C_1  J_1 Out_1 149.59843251526863 0.015   *    * 0.0 0.0
+        C_4  J_4   J_5 199.37834622058276 0.015   *    * 0.0 0.0
+        C_5  J_5  St_1  198.4804996424083 0.015   *    * 0.0 0.0
+        C_3  J_3   J_2 303.71366058687966  0.01 3.5    * 0.0 0.0
+        C_9  J_9   J_8  60.97188114979767 0.012   * 4.05 0.0 0.0
+        C_8  J_8   J_7 149.55523568562313 0.012   *    * 0.0 0.0
+        C_7  J_7   J_6 113.12152900325233 0.012   *    * 0.0 0.0
+       C_11  J_5   J_3              289.7 0.011   *    * 0.0 0.0
+        C_6  J_6  J_12               50.0  0.01   *    * 0.0 0.0
+C_13_street  J_6   J_2              300.0 0.016   *    * 0.0 0.0
+
+[PUMPS]
+;;Name FromNode ToNode PumpCurve Status Startup Shutoff
+;;-----------------------------------------------------
+P_1 St_1 J_10 PC_1 ON 1.5 0.2
+
+[WEIRS]
+;;Name FromNode ToNode Type CrestHeigh Qcoeff FlapGate EndContrac EndCoeff Surcharge RoadWidth RoadSurf CoeffCurve
+;;----------------------------------------------------------------------------------------------------------------
+W_1 St_1 Out_2 TRANSVERSE 1.0 3.0 NO 0.0 0.0 YES * * 
+
+[ORIFICES]
+;;Name FromNode ToNode Type InOffset Qcoeff FlapGate CloseTime
+;;------------------------------------------------------------
+C_12 J_12 J_3 SIDE * 80.0 YES 0.0
+
+[OUTLETS]
+;;Name FromNode ToNode InOffset RateCurve Qcoeff Qexpon FlapGate CurveName
+;;------------------------------------------------------------------------
+R_1 J_2 J_1 0.0 FUNCTIONAL/DEPTH 1.0 2.0 YES
+
+[XSECTIONS]
+;;Name XsectShape Geom1 Geom2 Geom3 Geom4 Barrels Culvert
+;;-------------------------------------------------------
+       C_10  CIRCULAR       0.2  0.0  0.0  0.0 1 
+        C_1  CIRCULAR       0.5  0.0  0.0  0.0 1 
+        C_4 IRREGULAR      tr_1                  
+        C_5  CIRCULAR       0.4  0.0  0.0  0.0 1 
+        C_3       EGG       2.0  0.0  0.0  0.0 1 
+        C_9  CIRCULAR       0.2  0.0  0.0  0.0 1 
+        C_8  CIRCULAR       0.2  0.0  0.0  0.0 1 
+        C_7  CIRCULAR       0.3  0.0  0.0  0.0 1 
+       C_11  CIRCULAR       0.4  0.0  0.0  0.0 1 
+        C_6  CIRCULAR       0.4  0.0  0.0  0.0 1 
+C_13_street    STREET street_13                  
+        W_1 RECT_OPEN       1.1  1.0  0.0  0.0   
+       C_12  CIRCULAR       1.0  0.0    0    0   
+
+[LOSSES]
+;;Name Kentry Kexit Kavg FlapGate Seepage
+;;---------------------------------------
+       C_10 0.0 0.0 0.0 YES 0.0
+        C_1 0.0 0.0 0.0  NO 0.0
+        C_4 0.0 0.0 0.0  NO 0.0
+        C_5 0.0 0.0 0.0  NO 0.0
+        C_3 0.0 0.0 0.0  NO 0.0
+        C_9 0.0 0.0 0.0  NO 0.0
+        C_8 0.0 0.0 0.0  NO 0.0
+        C_7 0.0 0.0 0.0  NO 0.0
+       C_11 0.0 0.0 0.0 YES 0.0
+        C_6   0   0   0  NO   0
+C_13_street   0   0   0  NO   0
+
+[REPORT]
+SUBCATCHMENTS ALL
+NODES ALL
+LINKS ALL
+
+[TAGS]
+
+[COORDINATES]
+;;Name X_Coord Y_Coord
+;;--------------------
+  J_1 310028.835  5998723.18
+  J_2 309815.969 5998688.997
+  J_3 309686.659 5998414.465
+  J_4 309313.323 5998132.746
+  J_9 309287.521 5998549.783
+  J_8 309341.272  5998522.51
+  J_7 309473.074  5998450.41
+  J_6 309573.106  5998479.76
+ J_10 309674.347 5998365.768
+ J_12 309660.521 5998436.901
+Out_1 310101.351 5998854.035
+Out_2 309745.934 5998259.417
+ St_1  309655.93 5998297.446
+
+[VERTICES]
+;;Link           X-Coord            Y-Coord
+;;-----------------------------------------
+C_4 309337.41 5998182.08
+C_4 309369.26 5998199.17
+C_4 309389.85 5998220.92
+C_3 309719.86 5998478.83
+C_3 309797.02 5998639.92
+C_8 309409.98 5998483.5
+C_7 309493.74 5998444.14
+C_7 309516.82 5998444.36
+C_7 309550.46 5998456.68
+C_7 309566.73 5998470.31
+C_11 309469.45 5998262.16
+C_11 309502.42 5998284.15
+C_11 309604.43 5998371.65
+C_11 309648.19 5998409.68
+
+[POLYGONS]
+;;Name   X-Coord            Y-Coord
+;;---------------------------------
+S_1 309224.76 5998177.81
+S_1 309277.59 5998129.64
+S_1 309312.93 5998050.78
+S_1 309246.51 5998023.21
+S_1 309188.63 5998105.56
+S_1 309224.76 5998177.81
+S_2 309206.84 5998591.77
+S_2 309336.77  5998517.9
+S_2 309250.15 5998391.05
+S_2  309145.5 5998448.21
+S_2 309186.83  5998519.0
+S_2 309169.68 5998529.34
+S_2 309206.84 5998591.77
+
+[SYMBOLS]
+;;Name X_Coord Y_Coord
+;;--------------------
+RG_1 309239.059 5998337.22
+

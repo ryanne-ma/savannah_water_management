@@ -46,6 +46,11 @@ J_12 3.41 0.0 0.0   0.0  0.0
 Out_1 0.0 TIDAL tdc_1 NO 
 Out_2 0.0 FIXED   1.1 NO 
 
+[DIVIDERS]
+;;Name Elevation DivertLink Type CutoffFlow Curve WeirMinFlo WeirMaxDep WeirCoeff MaxDepth InitDepth SurDepth Aponded
+;;-------------------------------------------------------------------------------------------------------------------
+J_5 4.5 C_11 CUTOFF  0.001     0.26 0.0 0.0 400.0
+
 [STORAGE]
 ;;Name Elevation MaxDepth InitDepth Type Curve Coeff Exponent Constant MajorAxis MinorAxis SideSlope SurfHeight SurDepth Fevap Psi Ksat IMD
 ;;-----------------------------------------------------------------------------------------------------------------------------------------
@@ -141,6 +146,7 @@ LINKS ALL
 Out_1 310101.351 5998854.035
 Out_2 309745.934 5998259.417
  St_1  309655.93 5998297.446
+  J_5 309464.816 5998243.841
 
 [VERTICES]
 ;;Link           X-Coord            Y-Coord
